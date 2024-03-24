@@ -7,25 +7,19 @@ const port=3000;
 const app=express();
 const Products=new ProductManager("./src/data/products.json");
 
-//para definir una ruta
-app.get("/", (req,res)=> {
-    res.send(`<h1>Home Page</h1>`);      
-})
-
-app.get("/Productos", async(req,res)=> {
-    let product = await Products.getProductsById(2);  
-    res.json(product);
-    
-    /*res.status(200).json({
-        status:"Ok",        
-        message: "List of products",  
-        data:product          
-    });*/        
+//Ruta para visualizar todos los productos o con un límite de visualización
+app.get("/products/", async(req,res)=> {
+    const {limit} = req.query;
+    console.log (limit);
+    let product = await Products.getProducts(limit);  
+    res.json({Products: product});         
 });
 
-
-app.get("/Contacto", (req,res)=> {
-    res.send(`<h1>Contact Page</h1>`);      
+//Ruta para visualizar solo uno de los productos por su id
+app.get("/products/:pid", async(req,res)=> {
+    const {pid} = req.params;
+    let product = await Products.getProductsById(Number(pid));  
+    res.json({Products: product});  
 })
 
 //el servidor escucha en el puerto 3000

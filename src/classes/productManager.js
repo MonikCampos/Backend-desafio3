@@ -25,7 +25,7 @@ class ProductManager {
         }
     }
 
-    #saveProductsInFile () { //funciona
+    #saveProductsInFile () { 
         try {
             fs.writeFileSync(this.#path ,JSON.stringify(this.#products));
         } catch (error) {
@@ -82,19 +82,23 @@ class ProductManager {
         }
     }
 
-    getProducts(){
+    getProducts(limit = 0){
         //devuelve los productos
-        //return this.#products;
-        return this.#readProductsInFile();
+        //limit es un parametro query que se envia desde el navegador
+        limit = Number(limit);
+        if (limit > 0)
+            return  this.#products.slice(0, limit);   
+        return this.#products;
     }
 
     getProductsById(id){
         //devuelve el producto que coincide con el id
+        console.log("Entro a getProductsbyid");
         const  product = this.#products.find((p)=> p.id===id);
         if(product)
             return product;
         else
-            return `No se encuentra producto con id: $(id)`;
+            return `No se encuentra producto con id: ${id}`;
     } 
 }
 //module.exports =  ProductManager;
