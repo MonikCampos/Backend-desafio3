@@ -1,0 +1,17 @@
+{
+  "name": "03-desafio",
+  "version": "1.0.0",
+  "description": "\"Desafio03: Servidor con express\"",
+  "type": "module",
+  "main": "productManager.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.js",
+    "start": "node ./src/app.js"
+  },
+  "author": "Mónica Campos",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.19.1"
+  }
+}
